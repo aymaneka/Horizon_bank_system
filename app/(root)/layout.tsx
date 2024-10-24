@@ -1,21 +1,25 @@
 import Mobilenav from '@/components/Mobilenav';
 import Sidebar from '@/components/Sidebar'; 
+import { getLoggedInUser } from '@/lib/actions/user.actions';
+import { redirect } from 'next/navigation';
 import Image from 'next/image';
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const loggedIn = { firstName: 'Aymane', lastName: 'kabiri' };
+  const loggedIn = await getLoggedInUser();
+  if (!loggedIn) 
+    redirect('/sign-in');  // Proper usage in the App Router
 
   return (
     <main className="flex h-screen w-full font-inter">
-      <Sidebar user={loggedIn} /> {/* Renders your Sidebar */}
+      <Sidebar user={loggedIn} /> 
       <div className="flex flex-col flex-grow">
         <div className='root-layout flex items-center justify-between p-4'>
           <Image src="/icons/logo.svg" width={30} height={30} alt="logo" />
-          <Mobilenav user={loggedIn} /> {/* Render Mobilenav here */}
+          <Mobilenav user={loggedIn} /> 
         </div>
         <div className="flex-grow">
           {children}

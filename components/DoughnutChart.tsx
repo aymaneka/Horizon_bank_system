@@ -15,19 +15,16 @@ const DoughnutChart = ({ accounts }: DoughnutChartProps) => {
         ],
         labels: ['Bank1', 'Bank2', 'Bank3', 'Bank4', 'Bank5', 'Bank6']
     }
-    return (
-        <div className="max-w-sm max-h-sm w-full h-full mx-auto">
-            <Doughnut data={data} 
-            options={{
-                cutout: 60,
-                plugins: {
-                    legend: {
-                        display: false
-                    }
-                }
-            }}
-            />
-        </div>
-    )
-}
+    return <Doughnut 
+        data={data} 
+        options={{
+          cutout: '60%',
+          plugins: {
+            legend: {
+              display: false
+            }
+          }
+        }}
+      />
+    }
 export default DoughnutChart
